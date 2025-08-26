@@ -62,7 +62,7 @@
     }
 
     #message {
-      font-size: 1.8em; /* büyütüldü */
+      font-size: 1.8em;
       color:white;
       text-shadow:2px 2px 5px #000;
       max-width: 600px;
@@ -72,10 +72,9 @@
 
     img.cat {
       position: absolute;
-      width: 120px; /* büyütüldü */
+      width: 120px;
     }
 
-    /* Kalp yıldızlar */
     .heart {
       position: absolute;
       top: -20px;
@@ -104,39 +103,17 @@
   <div id="message-container">
     <div id="message">💖 SEDEFFFFFFFFFFFFFF 💖 İYİ Kİ DOĞDUN 🎉 İYİ Kİ VARSIN 💕 SENİN GİBİ BİR İNSANI TANIDIĞIM İÇİN ÇOK ŞANSLIYIM 💖💖💖 YENİ YAŞIN UMARIM MUTLU GEÇERRRRR 😍 SENİ ÇOK SEVİYOMMMM 💕🎂🎁 İYİ Kİ DOĞDUN!!!!!! 💖</div>
     <!-- Kediler -->
- <img class="cat" src="kedi1.jpg" style="left:-130px; top:0; width:120px;">
-    <img class="cat" src="kedi2.jpg" style="left:-100; top:350px; width:180px;">
-    <img class="cat" src="kedi3.jpg" style="right:-150px; top:0; width:140px;">
-    <img class="cat" src="kedi4.jpg" style="right:20%; top:300px; width:140px;">
-    <img class="cat" src="kedi5.jpg" style="top:-180px; left:20%; width:160px;">
+    <img class="cat" src="kedi1.jpg" style="left:-130px; top:0; width:120px;">
+    <img class="cat" src="kedi2.jpg" style="left:-130px; top:100px; width:180px;">
+    <img class="cat" src="kedi3.jpg" style="right:-130px; top:0; width:140px;">
+    <img class="cat" src="kedi4.jpg" style="right:-130px; top:100px; width:140px;">
+    <img class="cat" src="kedi5.jpg" style="top:-100px; left:50%; transform:translateX(-50%); width:160px;">
   </div>
 
-<!-- Şarkı -->
-<audio id="song">
-  <source src="Nerdeysen.mp3" type="audio/mp3">
-</audio>
-
-<script>
-  const song = document.getElementById("song");
-
-  // Nakaratın başladığı ve bittiği saniyeler
-  const startTime = 65; // 1:05
-  const endTime = 100; // 1:40
-
-  // Şarkıyı başlat
-  function playChorus() {
-    song.currentTime = startTime; // Belirlenen saniyeden başlat
-    song.play();
-  }
-
-  // Belirlenen sürede şarkıyı durdur
-  song.addEventListener("timeupdate", () => {
-    if (song.currentTime >= endTime) {
-      song.pause();
-    }
-  });
-</script>
-
+  <!-- Şarkı -->
+  <audio id="song">
+    <source src="Nerdeysen.mp3" type="audio/mp3">
+  </audio>
 
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <script>
@@ -144,12 +121,28 @@
     const messageContainer = document.getElementById('message-container');
     const song = document.getElementById('song');
 
+    // Nakaratın başladığı ve bittiği saniyeler (örnek)
+    const startTime = 65; // 1:05
+    const endTime = 100;  // 1:40
+
+    function playChorus() {
+      song.currentTime = startTime;
+      song.play();
+    }
+
+    song.addEventListener("timeupdate", () => {
+      if (song.currentTime >= endTime) {
+        song.pause();
+      }
+    });
+
     balloon.addEventListener('click', () => {
       balloon.style.display = 'none';
       confetti({ particleCount: 60, angle: 60, spread: 70, origin: { x: 0, y: 1 }});
       confetti({ particleCount: 60, angle: 120, spread: 70, origin: { x: 1, y: 1 }});
       messageContainer.style.display = 'block';
-      song.play();
+
+      playChorus(); // balona tıklandığında nakarat çal
     });
   </script>
 </body>
