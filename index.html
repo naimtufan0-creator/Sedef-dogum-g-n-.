@@ -6,18 +6,27 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
   <style>
     body {
-      text-align: center;
-      background: linear-gradient(135deg, #ffdde1, #ee9ca7);
-      font-family: 'Poppins', sans-serif;
-      height: 100vh;
       margin: 0;
+      font-family: 'Poppins', sans-serif;
+      overflow: hidden;
       display: flex;
       justify-content: center;
       align-items: center;
-      flex-direction: column;
-      overflow: hidden;
+      height: 100vh;
       position: relative;
+      background: #000;
     }
+
+    /* Arka plan fotoğrafı */
+    body::before {
+      content: '';
+      position: absolute;
+      top:0; left:0; width:100%; height:100%;
+      background: url('sedef.jpg') center/cover no-repeat;
+      z-index: -2;
+      opacity: 0.3;
+    }
+
     #balloon {
       width: 150px;
       height: 200px;
@@ -29,6 +38,7 @@
       animation: float 3s ease-in-out infinite;
       z-index: 10;
     }
+
     #balloon::after {
       content:'';
       width:2px; height:50px;
@@ -38,45 +48,74 @@
       left:50%;
       transform:translateX(-50%);
     }
+
     @keyframes float {
       0%,100% { transform: translateY(0); }
       50% { transform: translateY(-15px);}
     }
+
     #message-container {
       display: none;
       position: relative;
       margin-top: 20px;
       z-index: 20;
     }
+
     #message {
       font-size:1.5em;
       color:white;
       text-shadow:2px 2px 5px #000;
       max-width: 600px;
       margin: 0 auto;
+      position: relative;
     }
+
     img.cat {
       position: absolute;
       width: 80px;
       top: 0;
     }
+
+    /* Kalp yıldızlar */
+    .heart {
+      position: absolute;
+      top: -20px;
+      font-size: 24px;
+      animation: fall 5s linear infinite;
+      color: pink;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(0) scale(1); opacity: 1;}
+      100% { transform: translateY(100vh) scale(0.5); opacity: 0;}
+    }
   </style>
 </head>
 <body>
 
+  <!-- Kalp yıldızlar -->
+  <div class="heart" style="left:10%;">❤️</div>
+  <div class="heart" style="left:30%;">💖</div>
+  <div class="heart" style="left:50%;">❤️</div>
+  <div class="heart" style="left:70%;">💖</div>
+  <div class="heart" style="left:90%;">❤️</div>
+
   <div id="balloon"></div>
 
   <div id="message-container">
-    <img class="cat" id="cat-left" src="kedi1.jpg" style="left: -90px;">
     <div id="message">💖 SEDEFFFFFFFFFFFFFF 💖 İYİ Kİ DOĞDUN 🎉 İYİ Kİ VARSIN 💕 SENİN GİBİ BİR İNSANI TANIDIĞIM İÇİN ÇOK ŞANSLIYIM 💖💖💖 YENİ YAŞIN UMARIM MUTLU GEÇERRRRR 😍 SENİ ÇOK SEVİYOMMMM 💕🎂🎁 İYİ Kİ DOĞDUN!!!!!! 💖</div>
-    <img class="cat" id="cat-right" src="kedi2.jpg" style="right: -90px;">
+    <!-- Kediler -->
+    <img class="cat" src="kedi1.jpg" style="left:-100px; top:0;">
+    <img class="cat" src="kedi2.jpg" style="left:-120px; top:60px;">
+    <img class="cat" src="kedi3.jpg" style="right:-100px; top:0;">
+    <img class="cat" src="kedi4.jpg" style="right:-120px; top:60px;">
+    <img class="cat" src="kedi5.jpg" style="top:-80px; left:50%; transform:translateX(-50%);">
   </div>
 
   <!-- Şarkı -->
   <audio id="song">
-  <source src="Nerdeysen.mp3" type="audio/mp3">
-</audio>
-
+    <source src="Nerdeysen.mp3" type="audio/mp3">
+  </audio>
 
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <script>
@@ -85,17 +124,10 @@
     const song = document.getElementById('song');
 
     balloon.addEventListener('click', () => {
-      // Balon kaybolsun
       balloon.style.display = 'none';
-
-      // Konfeti
       confetti({ particleCount: 60, angle: 60, spread: 70, origin: { x: 0, y: 1 }});
       confetti({ particleCount: 60, angle: 120, spread: 70, origin: { x: 1, y: 1 }});
-
-      // Mesaj ve kediler göster
       messageContainer.style.display = 'block';
-
-      // Şarkı çal
       song.play();
     });
   </script>
