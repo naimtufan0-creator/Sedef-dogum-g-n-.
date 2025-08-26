@@ -111,8 +111,7 @@
     <img class="cat" src="kedi5.jpg" style="top:-180px; left:20%; width:160px;">
   </div>
 
-  <!-- Şarkı -->
-  <!-- Şarkı -->
+<!-- Şarkı -->
 <audio id="song">
   <source src="Nerdeysen.mp3" type="audio/mp3">
 </audio>
@@ -120,21 +119,24 @@
 <script>
   const song = document.getElementById("song");
 
-  // Nakarat başlangıcı ve bitişi (saniye cinsinden)
-  const chorusStart = 45; 
-  const chorusEnd = 75;
+  // Nakaratın başladığı ve bittiği saniyeler
+  const startTime = 65; // 1:05
+  const endTime = 100; // 1:40
 
-  // Şarkıyı nakarattan başlat
-  song.currentTime = chorusStart;
-  song.play();
+  // Şarkıyı başlat
+  function playChorus() {
+    song.currentTime = startTime; // Belirlenen saniyeden başlat
+    song.play();
+  }
 
-  // Nakarat bitince başa dön
+  // Belirlenen sürede şarkıyı durdur
   song.addEventListener("timeupdate", () => {
-    if (song.currentTime >= chorusEnd) {
-      song.currentTime = chorusStart;
+    if (song.currentTime >= endTime) {
+      song.pause();
     }
   });
 </script>
+
 
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <script>
