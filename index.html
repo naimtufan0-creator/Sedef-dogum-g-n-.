@@ -112,9 +112,29 @@
   </div>
 
   <!-- Şarkı -->
-  <audio id="song">
-    <source src="Nerdeysen.mp3" type="audio/mp3">
-  </audio>
+  <!-- Şarkı -->
+<audio id="song">
+  <source src="Nerdeysen.mp3" type="audio/mp3">
+</audio>
+
+<script>
+  const song = document.getElementById("song");
+
+  // Nakarat başlangıcı ve bitişi (saniye cinsinden)
+  const chorusStart = 45; 
+  const chorusEnd = 75;
+
+  // Şarkıyı nakarattan başlat
+  song.currentTime = chorusStart;
+  song.play();
+
+  // Nakarat bitince başa dön
+  song.addEventListener("timeupdate", () => {
+    if (song.currentTime >= chorusEnd) {
+      song.currentTime = chorusStart;
+    }
+  });
+</script>
 
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <script>
