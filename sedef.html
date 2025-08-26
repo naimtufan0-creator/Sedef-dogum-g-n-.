@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>Sedef Doğum Günü 🎉</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      text-align: center;
+      background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+      font-family: 'Poppins', sans-serif;
+      height: 100vh;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    #balloon {
+      width: 150px;
+      height: 200px;
+      background: radial-gradient(circle at 30% 30%, #ff6f61, #d62828);
+      border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+      cursor: pointer;
+      position: relative;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      animation: float 3s ease-in-out infinite;
+    }
+    #balloon::after {
+      content:'';
+      width:2px; height:50px;
+      background:#fff;
+      position:absolute;
+      bottom:-50px;
+      left:50%;
+      transform:translateX(-50%);
+    }
+    @keyframes float {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-15px);}
+    }
+    #message {
+      display:none;
+      font-size:1.5em;
+      color:white;
+      text-shadow:2px 2px 5px #000;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="balloon"></div>
+  <div id="message">💖 SEDEFFFFFFFFFFFFFF 💖 İYİ Kİ DOĞDUN 🎉 İYİ Kİ VARSIN 💕 SENİN GİBİ BİR İNSANI TANIDIĞIM İÇİN ÇOK ŞANSLIYIM 💖💖💖 YENİ YAŞIN UMARIM MUTLU GEÇERRRRR 😍 SENİ ÇOK SEVİYOMMMM 💕🎂🎁 İYİ Kİ DOĞDUN!!!!!! 💖</div>
+
+  <!-- Şarkı (geçici link, sen kendi MP3’ünü koy) -->
+  <audio id="song" preload="auto">
+  <source src="Nerdeysen.mp3" type="audio/mp3">
+</audio>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <script>
+    const balloon = document.getElementById('balloon');
+    const message = document.getElementById('message');
+    const song = document.getElementById('song');
+
+    balloon.addEventListener('click', () => {
+      // Balon kaybolsun
+      balloon.style.display = 'none';
+
+      // Konfeti sağ alt ve sol alt çaprazdan yukarı uçur
+      confetti({ particleCount: 60, angle: 60, spread: 70, origin: { x: 0, y: 1 }});
+      confetti({ particleCount: 60, angle: 120, spread: 70, origin: { x: 1, y: 1 }});
+
+      // Mesaj göster
+      message.style.display = 'block';
+
+      // Şarkı çal
+      song.play();
+    });
+  </script>
+</body>
+</html>
