@@ -42,28 +42,38 @@
       0%,100% { transform: translateY(0); }
       50% { transform: translateY(-15px);}
     }
-    #message {
-      display:none;
-      font-size:1.5em;
-      color:white;
-      text-shadow:2px 2px 5px #000;
+    #message-container {
+      display: none;
+      position: relative;
       margin-top: 20px;
       z-index: 20;
     }
+    #message {
+      font-size:1.5em;
+      color:white;
+      text-shadow:2px 2px 5px #000;
+      max-width: 600px;
+      margin: 0 auto;
+    }
     img.cat {
       position: absolute;
-      z-index: 5;
-      transition: all 2s ease-out;
+      width: 80px;
+      top: 0;
     }
   </style>
 </head>
 <body>
 
   <div id="balloon"></div>
-  <div id="message">💖 SEDEFFFFFFFFFFFFFF 💖 İYİ Kİ DOĞDUN 🎉 İYİ Kİ VARSIN 💕 SENİN GİBİ BİR İNSANI TANIDIĞIM İÇİN ÇOK ŞANSLIYIM 💖💖💖 YENİ YAŞIN UMARIM MUTLU GEÇERRRRR 😍 SENİ ÇOK SEVİYOMMMM 💕🎂🎁 İYİ Kİ DOĞDUN!!!!!! 💖</div>
+
+  <div id="message-container">
+    <img class="cat" id="cat-left" src="kedi1.jpg" style="left: -90px;">
+    <div id="message">💖 SEDEFFFFFFFFFFFFFF 💖 İYİ Kİ DOĞDUN 🎉 İYİ Kİ VARSIN 💕 SENİN GİBİ BİR İNSANI TANIDIĞIM İÇİN ÇOK ŞANSLIYIM 💖💖💖 YENİ YAŞIN UMARIM MUTLU GEÇERRRRR 😍 SENİ ÇOK SEVİYOMMMM 💕🎂🎁 İYİ Kİ DOĞDUN!!!!!! 💖</div>
+    <img class="cat" id="cat-right" src="kedi2.jpg" style="right: -90px;">
+  </div>
 
   <!-- Şarkı -->
- <audio id="song" preload="auto">
+  <audio id="song">
   <source src="Nerdeysen.mp3" type="audio/mp3">
 </audio>
 
@@ -71,17 +81,8 @@
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <script>
     const balloon = document.getElementById('balloon');
-    const message = document.getElementById('message');
+    const messageContainer = document.getElementById('message-container');
     const song = document.getElementById('song');
-
-    // Kendi kedi fotoğrafların
-    const catImages = [
-      'kedi1.jpg',
-      'kedi2.jpg',
-      'kedi3.jpg',
-      'kedi4.jpg',
-      'kedi5.jpg'
-    ];
 
     balloon.addEventListener('click', () => {
       // Balon kaybolsun
@@ -91,38 +92,11 @@
       confetti({ particleCount: 60, angle: 60, spread: 70, origin: { x: 0, y: 1 }});
       confetti({ particleCount: 60, angle: 120, spread: 70, origin: { x: 1, y: 1 }});
 
-      // Mesaj
-      message.style.display = 'block';
+      // Mesaj ve kediler göster
+      messageContainer.style.display = 'block';
 
       // Şarkı çal
       song.play();
-
-      // Çoklu kediler ekle
-      catImages.forEach((src, index) => {
-        const cat = document.createElement('img');
-        cat.src = src;
-        cat.className = 'cat';
-        cat.style.width = `${100 + Math.random()*50}px`;
-
-        // Kedileri ekranın sağ sol köşelerine yerleştir
-        if(index % 2 === 0) {
-          cat.style.left = '5%';
-        } else {
-          cat.style.right = '5%';
-        }
-
-        cat.style.bottom = `${5 + index*10}%`;
-        document.body.appendChild(cat);
-
-        // Kediler yukarıya doğru uçsun ve kaybolsun
-        setTimeout(() => {
-          cat.style.bottom = `${50 + Math.random()*20}%`;
-          cat.style.transform = `rotate(${Math.random()*360}deg)`;
-          cat.style.opacity = 0;
-        }, 50);
-
-        setTimeout(() => cat.remove(), 3000);
-      });
     });
   </script>
 </body>
